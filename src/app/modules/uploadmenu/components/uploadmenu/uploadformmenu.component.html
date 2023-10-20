@@ -1,0 +1,112 @@
+<div class="container-fluid m-5">
+  <h1 class="text-primary text-center">Generar Menu</h1>
+  <div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-2 col-form-label">Project Id</label>
+    <div class="col-sm-10">
+
+      <input class="form-control" type="text" list="datalistOptions" [(ngModel)]="projectid" id="exampleDataList" placeholder="Project Id.">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Archivo</label>
+    <div class="col-sm-10">
+      <input type="file" class="form-control w-50" (change)="readExcelFile($event)" >
+    </div>
+  </div>
+
+
+  <form class="form-group" [formGroup]="form" *ngIf="configurations && configurations.length>0">
+    <div formArrayName="items">
+      <table class="table" *ngIf="items.value.length">
+        <tr>
+          <th>Identificador</th>
+          <th>Posición</th>
+          <th>Español</th>
+          <th>Ingles</th>
+          <th>Portugues</th>
+          <th>Brasileño</th>
+          <th>Frances</th>
+          <th>Italiano</th>
+          <th>Aleman</th>
+          <th>Accion</th>
+          <th>Eliminar</th>
+
+        </tr>
+        <tr *ngFor="let x of items.controls; let i = index; " [formGroupName]="i">
+          <td>
+            <input
+              class="form-control"
+              formControlName="identificador"
+              placeholder="identificador"
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              formControlName="posicion"
+              placeholder="posicion"
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              formControlName="espanol"
+              placeholder="espanol"
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              formControlName="ingles"
+              placeholder="ingles"
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              formControlName="portugues"
+              placeholder="portugues"
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              formControlName="brasileno"
+              placeholder="brasileno"
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              formControlName="frances"
+              placeholder="frances"
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              formControlName="italiano"
+              placeholder="italiano"
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              formControlName="aleman"
+              placeholder="aleman"
+            />
+          </td>
+          <td>
+            <button class="button" (click)="execute(i)">Ejecutar</button>
+          </td>
+          <td>
+            <button class="button" (click)="deleteItem(i)">Delete Item</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
+  <span *ngIf="script != ''">
+    <p>{{script}}</p>
+  </span>
+</div>

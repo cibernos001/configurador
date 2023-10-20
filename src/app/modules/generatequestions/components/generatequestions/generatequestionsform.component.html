@@ -1,0 +1,100 @@
+<div class="container-fluid m-5">
+  <h1 class="text-primary text-center">Generar Preguntas</h1>
+  <input type="file" class="form-control w-50" (change)="readExcelFile($event)" >
+
+  <form class="form-group" [formGroup]="form" *ngIf="configurations && configurations.length>0">
+    <div formArrayName="items">
+      <table class="table" *ngIf="items.value.length">
+        <tr>
+          <th>Nombre_ Descripcion_Seccion</th>
+          <th>Tipo</th>
+          <th>Obligatoria</th>
+          <th>Habilitada</th>
+          <th>Orden</th>
+          <th>QuestionId</th>
+          <th>RepeaterId</th>
+          <th>Shared</th>
+          <th>Supplier</th>
+          <th>Buyer</th>
+          <th>Internal</th>
+          <th>Auditor</th>
+          <th>Accions</th>
+
+        </tr>
+        <tr *ngFor="let x of items.controls; let i = index; " [formGroupName]="i">
+          <td>
+            <input
+              class="form-control"
+              formControlName="name"
+              placeholder="Item name"
+            />
+          </td>
+          <td>
+            <select class="form-control" formControlName="tipo">
+              <option *ngFor="let type of typesquestions" [value]="type">{{type}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="obligatoria">
+              <option *ngFor="let type of typevisible" [value]="type">{{type}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="habilitada">
+              <option *ngFor="let type of typevisible" [value]="type">{{type}}</option>
+            </select>
+          </td>
+          <td style="width: 30px;">
+            <input
+              class="form-control"
+              formControlName="orden"
+              placeholder="Orden"
+            />
+          </td>
+          <td  style="width: 30px;">
+            <input
+              class="form-control"
+              formControlName="questionId"
+              placeholder="Question Id"
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              formControlName="repeaterId"
+              placeholder="Repeater Id"
+            />
+          </td>
+          <td>
+            <select class="form-control" formControlName="shared">
+              <option *ngFor="let type of types" [value]="type">{{type}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="supplier">
+              <option *ngFor="let type of types" [value]="type">{{type}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="buyer">
+              <option *ngFor="let type of types" [value]="type">{{type}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="internal">
+              <option *ngFor="let type of types" [value]="type">{{type}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="auditor">
+              <option *ngFor="let type of types" [value]="type">{{type}}</option>
+            </select>
+          </td>
+          <td>
+            <button class="button" (click)="deleteItem(i)">Delete Item</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
+</div>
